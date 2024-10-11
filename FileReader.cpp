@@ -1,9 +1,13 @@
 #include "FileReader.h"
+#include "dsutil.h"
+#include "global.h"
+#include <format>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
 
+using namespace dsutil;
 using namespace std;
 
 /// <summary>
@@ -13,7 +17,10 @@ using namespace std;
 void FileReader::addLineToFile(const string &newLine)
 {
     file.push_back(newLine);
-    cout << "Adding line: " << newLine << endl;
+
+    // Debug message (full)
+    if (g_debugMode && g_verbosity >= 3)
+        Debug(format("[Added line: {}", newLine), 3);
 }
 
 /// <summary>
@@ -22,8 +29,11 @@ void FileReader::addLineToFile(const string &newLine)
 /// <param name="path"> - The path to the file, relative to the directory the program is run from.</param>
 FileReader::FileReader(const string &path)
 {
+    // Constructor debug message (detailed).
+    if (g_debugMode && g_verbosity >= 2)
+        Debug(format("Created a FileReader object. Reading from file: {}", path), 2);
+
     filePath = path;
-    cout << "Created a FileReader object. Reading from file:" << path << endl;
     readFile(path);
 }
 
@@ -32,17 +42,20 @@ FileReader::FileReader(const string &path)
 /// </summary>
 /// <param name="path"> - The path to the file relative to the directory that the program is run in.</param>
 /// <param name="format"> - The format of the file.</param>
-FileReader::FileReader(const string &path, const string &format)
+FileReader::FileReader(const string &path, const int &format)
 {
+    // Debug message (detailed).
+    Debug(std::format("Created a FileReader object. Reading from file: {}", path), 2);
+
     filePath = path;
     fileFormat = format;
-    cout << "Created a FileReader object. Reading from file:" << path << endl;
     readFile(path);
 }
 
 void FileReader::readFile(const string &path)
 {
-    cout << "Reading from path: " << path << endl;
+    // Debug message (standard).
+    Debug(std::format("Reading from file: {}", path), 1);
 
     // Create an input file stream (ifstream). Open the file in binary mode.
     ifstream inputFile(path);
@@ -50,7 +63,8 @@ void FileReader::readFile(const string &path)
     // Check if the file is open.
     if (!inputFile.is_open())
     {
-        cout << "Error: Could not open the file!" << endl;
+        // Debug message (Error/Warning)
+        Debug("Error: Could not open the file!", 0);
         return;
     }
 
@@ -60,30 +74,47 @@ void FileReader::readFile(const string &path)
     // Read file line-by-line using getline
     while (getline(inputFile, line))
     {
-        cout << lineNumber << ":" << line << endl;
         addLineToFile(line);
         lineNumber++;
+
+        // Debug message (standard)
+        Debug(format("Line {} \t {}", lineNumber, line), 1);
     }
 
     // Close the file after reading
     inputFile.close();
 
-    cout << "Finished reading from path: " << path << endl;
-
-    cout << "File is of type: " << getFileFormat() << endl;
+    // Final debug messages.
+    Debug(format("Finished reading from path: {}", path), 2);
+    Debug(format("File is of type: {}", getFileFormat()), 1);
 }
 
-string FileReader::getFileFormat()
+int FileReader::getFileFormat()
 {
     // Attempt to detect VASP input by either the file name or the file extension.
     // Looking for: 'POSCAR', 'CONTCAR' or '*.vasp'
     if (filePath == "POSCAR" || filePath == "CONTCAR" ||
         (filePath.length() > 5 && filePath.substr(filePath.length() - 5) == ".vasp"))
     {
-        return "VASP";
+        return formatMap["VASP"];
     }
     else
     {
-        return "???";
+        return 0;
     }
+}
+
+string FileReader::getFilePath()
+{
+    return filePath;
+}
+
+string FileReader::getLine(const int &index)
+{
+    return file[index];
+}
+
+int FileReader::getFileLength()
+{
+    return file.size();
 }
