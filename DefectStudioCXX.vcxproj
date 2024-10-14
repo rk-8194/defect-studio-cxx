@@ -129,18 +129,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Atom.cpp" />
+    <ClCompile Include="Command.cpp" />
+    <ClCompile Include="CommandArguments.cpp" />
     <ClCompile Include="CrystalStructure.cpp" />
     <ClCompile Include="DefectStudioCXX.cpp" />
     <ClCompile Include="dsutil.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="global.cpp" />
+    <ClCompile Include="TaskManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Atom.h" />
+    <ClInclude Include="Command.h" />
+    <ClInclude Include="CommandArguments.h" />
     <ClInclude Include="CrystalStructure.h" />
     <ClInclude Include="dsutil.h" />
     <ClInclude Include="FileReader.h" />
     <ClInclude Include="global.h" />
+    <ClInclude Include="TaskManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

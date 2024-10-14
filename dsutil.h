@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <cstdlib>
 #include <iostream>
 #include <map>
 #include <string>
@@ -22,7 +23,9 @@ struct Vector3D
 
 extern std::map<std::string, int> formatMap;
 
-std::string printMatrix(const std::array<std::array<double, 3>, 3>& matrix);
+std::string printMatrix(const std::array<std::array<double, 3>, 3> &matrix);
 
 void Debug(const std::string &message, const std::int16_t &level);
+
+int randomID();
 } // namespace dsutil

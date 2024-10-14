@@ -29,4 +29,11 @@ std::string dsutil::printMatrix(const std::array<std::array<double, 3>, 3> &matr
                        matrix[1][1], matrix[1][2], matrix[2][0], matrix[2][1], matrix[2][2]);
 }
 
+int dsutil::randomID()
+{
+    srand(g_randomIDCount);
+    ++g_randomIDCount;
+    return static_cast<int>(time(nullptr)) + rand();
+}
+
 std::map<std::string, int> dsutil::formatMap = {{"VASP", 1}, {"XYZ", 2}};

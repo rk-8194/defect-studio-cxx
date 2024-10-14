@@ -23,6 +23,12 @@ void FileReader::addLineToFile(const string &newLine)
         Debug(format("[Added line: {}", newLine), 3);
 }
 
+// Default constructor. Does not read anything.
+FileReader::FileReader()
+{
+    fileFormat = static_cast<int>(-1);
+}
+
 /// <summary>
 /// Constructor implementation for the file reader.
 /// </summary>
@@ -116,5 +122,5 @@ string FileReader::getLine(const int &index)
 
 int FileReader::getFileLength()
 {
-    return file.size();
+    return static_cast<int>(file.size());
 }

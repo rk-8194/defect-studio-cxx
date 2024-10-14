@@ -10,6 +10,7 @@ using namespace std;
 class FileReader
 {
   public:
+    FileReader();
     FileReader(const string &path);                    // Constructor declaration
     FileReader(const string &path, const int &format); // Constructor declaration (with file format specified).
     string getFilePath();
