@@ -27,9 +27,6 @@ int main()
 
     // Read the TASKS file.
     TaskManager tasks(tasksReader);
-    TaskManager tasksChild(childTasks);
-
-    tasksChild.setParent(tasks);
 
     return 0;
 }

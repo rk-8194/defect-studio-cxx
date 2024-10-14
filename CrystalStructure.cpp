@@ -41,6 +41,13 @@ void CrystalStructure::loadFromFileReader(FileReader &fileReader)
     {
         (this->*buildStructure)(fileReader);
     }
+
+    g_workStructure = *this;
+}
+
+std::map<int, Atom> CrystalStructure::getAtoms()
+{
+    return atoms;
 }
 
 #include <algorithm> // Required for std::sort

@@ -13,6 +13,9 @@ CommandArguments::CommandArguments(const std::string &key, const std::vector<std
 
 void CommandArguments::printArguments()
 {
+    if (list.size() == 0)
+        return;
+
     for (const auto &pair : list)
     {
         dsutil::Debug(std::format("- Argument: {}", pair.first), 2);

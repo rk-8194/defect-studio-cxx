@@ -1,17 +1,2 @@
-﻿  Atom.cpp
-  Command.cpp
-  CommandArguments.cpp
-  CrystalStructure.cpp
-  DefectStudioCXX.cpp
-  FileReader.cpp
-  TaskManager.cpp
-C:\Users\vp8194\source\repos\DefectStudioCXX\TaskManager.cpp(102,49): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
-C:\Users\vp8194\source\repos\DefectStudioCXX\TaskManager.cpp(102,49): warning C4267:         with
-C:\Users\vp8194\source\repos\DefectStudioCXX\TaskManager.cpp(102,49): warning C4267:         [
-C:\Users\vp8194\source\repos\DefectStudioCXX\TaskManager.cpp(102,49): warning C4267:             _Ty=int
-C:\Users\vp8194\source\repos\DefectStudioCXX\TaskManager.cpp(102,49): warning C4267:         ]
-  dsutil.cpp
-  global.cpp
-  Generating Code...
-  LINK : C:\Users\vp8194\source\repos\DefectStudioCXX\x64\Debug\DefectStudioCXX.exe not found or not built by the last incremental link; performing full link
+﻿  DefectStudioCXX.cpp
   DefectStudioCXX.vcxproj -> C:\Users\vp8194\source\repos\DefectStudioCXX\x64\Debug\DefectStudioCXX.exe

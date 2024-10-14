@@ -5,9 +5,8 @@ using namespace std;
 
 // Definition of registered commands.
 unordered_map<string, function<void(Command &, CommandArguments &)>> TaskManager::registeredCommands = {
-    {"TASK1",
-     [](Command &cmd, CommandArguments &args) { cmd.testCommand(args); }} // Using a lambda to bind the member function
-};
+    {"TASK1", [](Command &cmd, CommandArguments &args) { cmd.testCommand(args); }},
+    {"RECENTER", [](Command &cmd, CommandArguments &args) { cmd.recenter(args); }}};
 
 // Definition of registered arguments.
 unordered_map<string, int> TaskManager::registeredArguments = {
