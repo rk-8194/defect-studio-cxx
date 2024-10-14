@@ -10,7 +10,7 @@ int main()
 {
     std::cout << "Hello World!\n";
 
-    g_debugMode = true;
+    g_debugMode = false;
     g_verbosity = 1;
 
     FileReader reader("POSCAR");

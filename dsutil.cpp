@@ -10,11 +10,20 @@
 
 void dsutil::Debug(const std::string &message, const std::int16_t &level)
 {
-    if (g_debugMode && g_verbosity >= level)
-        std::cout << format("[{}]\t{}", level, message) << std::endl;
+    if (level > 0)
+    {
+        if (!g_debugMode)
+            return;
+        else if (g_verbosity >= level)
+            std::cout << format("[{}]\t{}", level, message) << std::endl;
+    }
+    else if (level == 0)
+        std::cout << format("\t{}", message) << std::endl;
+    else
+        std::cout << format("[!!!]\t{}", message) << std::endl;
 }
 
-std::string dsutil::getMatrix(const std::array<std::array<double, 3>, 3> &matrix)
+std::string dsutil::printMatrix(const std::array<std::array<double, 3>, 3> &matrix)
 {
     return std::format("{} {} {}\n\t{} {} {}\n\t{} {} {}", matrix[0][0], matrix[0][1], matrix[0][2], matrix[1][0],
                        matrix[1][1], matrix[1][2], matrix[2][0], matrix[2][1], matrix[2][2]);

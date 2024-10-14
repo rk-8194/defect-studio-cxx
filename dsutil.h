@@ -22,7 +22,7 @@ struct Vector3D
 
 extern std::map<std::string, int> formatMap;
 
-std::string getMatrix(const std::array<std::array<double, 3>, 3>& matrix);
+std::string printMatrix(const std::array<std::array<double, 3>, 3>& matrix);
 
 void Debug(const std::string &message, const std::int16_t &level);
 } // namespace dsutil

@@ -64,7 +64,7 @@ void FileReader::readFile(const string &path)
     if (!inputFile.is_open())
     {
         // Debug message (Error/Warning)
-        Debug("Error: Could not open the file!", 0);
+        Debug("Error: Could not open the file!", -1);
         return;
     }
 
@@ -78,7 +78,7 @@ void FileReader::readFile(const string &path)
         lineNumber++;
 
         // Debug message (standard)
-        Debug(format("Line {} \t {}", lineNumber, line), 1);
+        Debug(format("Line {} \t {}", lineNumber, line), 2);
     }
 
     // Close the file after reading

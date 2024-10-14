@@ -85,7 +85,7 @@ void CrystalStructure::buildVasp(FileReader &fileReader)
     }
 
     // Debug message (detailed)
-    Debug(getMatrix(lattice), 2);
+    Debug(printMatrix(lattice), 0);
 
     // Get the map of atoms and species.
     std::stringstream labels(fileReader.getLine(poscar["SPECIES_LABELS"]));
@@ -166,5 +166,5 @@ void CrystalStructure::addAtom(const int &index, const Atom &atom)
     atoms[index] = atom;
     Debug(format("{}\t{}\t{}\t{}\t{}", index, atom.atomType, atom.atomPosition.x, atom.atomPosition.y,
                  atom.atomPosition.z),
-          1);
+          0);
 }
