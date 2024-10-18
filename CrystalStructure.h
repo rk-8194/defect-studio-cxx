@@ -11,6 +11,7 @@ class CrystalStructure
     CrystalStructure();
     void loadFromFileReader(FileReader &fileReader);
     void addAtom(const int &index, const Atom &atom);
+    map<int, Atom> getAtoms();
 
   private:
     map<int, Atom> atoms;
