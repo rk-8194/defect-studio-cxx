@@ -93,6 +93,24 @@ void FileReader::readFile(const string &path)
     // Final debug messages.
     Debug(format("Finished reading from path: {}", path), 2);
     Debug(format("File is of type: {}", getFileFormat()), 1);
+
+    // Set the file format.
+    fileFormat = getFileFormat();
+
+    // Create a new crystal structure if the input file contained crystallographic information.
+    switch (fileFormat)
+    {
+    case 0:
+        break;
+    case 1: {   // VASP file structure.
+        CrystalStructure structure;
+        structure.loadFromFileReader(*this);
+        break;
+    }
+    default:
+        Debug("File format not recognised.", -1);
+        break;
+    }
 }
 
 int FileReader::getFileFormat()

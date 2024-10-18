@@ -3,6 +3,8 @@
 #include "CrystalStructure.h"
 #include "dsutil.h"
 #include "global.h"
+#include <iterator>
+#include <random>
 #include <string>
 
 class Command
