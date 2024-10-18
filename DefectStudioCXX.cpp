@@ -17,13 +17,7 @@ int main()
     g_verbosity = 3;
 
     // Create the file readers.
-    FileReader reader("POSCAR");
     FileReader tasksReader("TASKS");
-    FileReader childTasks("TASKS");
-
-    // Load the crystal structure.
-    CrystalStructure structure;
-    structure.loadFromFileReader(reader);
 
     // Read the TASKS file.
     TaskManager tasks(tasksReader);

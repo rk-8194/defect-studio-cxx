@@ -7,8 +7,12 @@
 
 class Command
 {
+  private:
+    void checkInputFile(CommandArguments &args);
+
   public:
     Command();
     void testCommand(CommandArguments &args);
     void recenter(CommandArguments &args);
+    void substitute(CommandArguments &args);
 };
