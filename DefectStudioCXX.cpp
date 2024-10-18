@@ -14,13 +14,15 @@ int main()
 
     // Debug settings.
     g_debugMode = true;
-    g_verbosity = 3;
+    g_verbosity = 2;
 
     // Create the file readers.
     FileReader tasksReader("TASKS");
 
     // Read the TASKS file.
     TaskManager tasks(tasksReader);
+
+    // g_workStructure.print();
 
     return 0;
 }

@@ -50,6 +50,37 @@ std::map<int, Atom> CrystalStructure::getAtoms()
     return atoms;
 }
 
+std::map<int, Atom> CrystalStructure::getAtomsOfType(const string &type)
+{
+    Debug(format("Getting atoms of type: {}", type), 3);
+
+    std::map<int, Atom> result; // New map to hold the filtered results
+
+    // Iterate over the original map
+    for (const auto &pair : atoms)
+    {
+        const Atom &atom = pair.second; // Access the Atom object
+
+        // If the atomType matches, insert the Atom into the result map
+        if (atom.atomType == type)
+        {
+            result.insert(pair); // Insert the whole pair (key and Atom)
+        }
+    }
+
+    Debug(format("Number of atoms in filtered atom list: {}", result.size()), 3);
+
+    return result; // Return the filtered map
+}
+
+void CrystalStructure::replaceAtom(const int &index, const Atom &atom)
+{
+    Debug(format("Atom at position {} was substituted.\n\t\tPrevious: {} \t| New: {}", index, atoms[index].atomType,
+                 atom.atomType),
+          1);
+    atoms[index] = atom;
+}
+
 #include <algorithm> // Required for std::sort
 #include <iostream>
 #include <map>
@@ -165,6 +196,26 @@ void CrystalStructure::buildVasp(FileReader &fileReader)
         // Add the atom to the structure.
         Atom atom = Atom(_element, Vector3D(position[0], position[1], position[2]));
         addAtom(atomIndex, atom); // Assuming `addAtom` takes an atom index and atom object.
+    }
+}
+
+void CrystalStructure::printStructure()
+{
+    // Only print the output in DETAILED mode.
+    int _verbosity = 2;
+
+    // Print the lattice parameters.
+    Debug("---### Lattice Parameters ###---", _verbosity);
+    Debug(format("{}", dsutil::printMatrix(lattice)), _verbosity);
+
+    // Print the atoms.
+    Debug("---### Atomic Coordinates ###---", _verbosity);
+    for (int i = 0; i < atoms.size(); ++i)
+    {
+        Atom atom = atoms[i];
+        Debug(format("{}\t{}\t{}\t{}\t{}", (i + 1), atom.atomType, atom.atomPosition.x, atom.atomPosition.y,
+                     atom.atomPosition.z),
+              _verbosity);
     }
 }
 

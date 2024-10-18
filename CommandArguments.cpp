@@ -72,12 +72,12 @@ bool CommandArguments::hasArgument(const std::string &key)
 
     if (it != list.end())
     {
-        dsutil::Debug(std::format("The argument {} was found.", key), 2);
+        dsutil::Debug(std::format("The argument {} was found.", key), 3);
         return true;
     }
     else
     {
-        dsutil::Debug(std::format("The argument {} was not found.", key), 2);
+        dsutil::Debug(std::format("The argument {} was not found.", key), 3);
         return false;
     }
 }
