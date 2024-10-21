@@ -9,13 +9,12 @@ class CrystalStructure
 {
   public:
     CrystalStructure();
-    CrystalStructure(const array<array<double, 3>, 3>& _lattice, const map<int, Atom>& _atoms);
     void loadFromFileReader(FileReader &fileReader);
     void printStructure();
     void addAtom(const int &index, const Atom &atom);
     map<int, Atom> getAtoms();
-    std::map<int, Atom> getAtomsOfType(const string &type);
     array<array<double, 3>, 3> getLattice();
+    std::map<int, Atom> getAtomsOfType(const string &type);
     void replaceAtom(const int &index, const Atom &atom);
 
   private:

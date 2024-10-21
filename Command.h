@@ -4,6 +4,7 @@
 #include "FileWriter.h"
 #include "dsutil.h"
 #include "global.h"
+#include <algorithm>
 #include <iterator>
 #include <random>
 #include <string>
@@ -19,4 +20,5 @@ class Command
     void setGlobals(CommandArguments& args);
     void recenter(CommandArguments &args);
     void substitute(CommandArguments &args);
+    void volume(CommandArguments &args);
 };

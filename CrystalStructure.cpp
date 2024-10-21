@@ -64,6 +64,11 @@ std::map<int, Atom> CrystalStructure::getAtoms()
     return atoms;
 }
 
+std::array<array<double,3>,3> CrystalStructure::getLattice()
+{
+    return lattice;
+}
+
 std::map<int, Atom> CrystalStructure::getAtomsOfType(const string &type)
 {
     Debug(format("Getting atoms of type: {}", type), 3);
