@@ -32,6 +32,15 @@ void Command::testCommand(CommandArguments &args)
     args.printArguments();
 }
 
+void Command::setGlobals(CommandArguments &args)
+{
+    if (args.hasArgument("MAX_SUB"))
+    {
+        g_maxSubAttempts = stoi(args.findArgument("MAX_SUB")[0]);
+        Debug(format("SET \tMaximum substitution attempts\n\t\tValue: {}", g_maxSubAttempts), 0);
+    }
+}
+
 void Command::recenter(CommandArguments &args)
 {
     map<int, Atom> atoms = g_workStructure.getAtoms();
@@ -39,10 +48,15 @@ void Command::recenter(CommandArguments &args)
 
 void Command::substitute(CommandArguments &args)
 {
-    /* args.printArguments(); */
+    // args.printArguments();
 
     // Check for a new input file. Set the work structure if a new input file is loaded.
     checkInputFile(args);
+
+    // Get the desired output file name.
+    string output = "OUTPUT";
+    if (args.hasArgument("OUTPUT_FILE"))
+        output = args.findArgument("OUTPUT_FILE")[0];
 
     // Get the list of atoms in the current working structure.
     map<int, Atom> atoms = g_workStructure.getAtoms();
@@ -128,11 +142,12 @@ void Command::substitute(CommandArguments &args)
 
         // Create a new element with the same position but different type.
         // Added it to the current work structure by replacing the atom at the same index.
-        Atom newAtom = Atom(newElement, it->second.atomPosition);
-        g_workStructure.replaceAtom(it->first, newAtom);
+        g_workStructure.replaceAtom(it->first, Atom(newElement, it->second.atomPosition));
         excluded.push_back(it->first);
     }
 
     // Print the final structure to the terminal (depends on verbosity level)
     g_workStructure.printStructure();
+    FileWriter writer;
+    writer.writeToFile(output, "VASP", g_workStructure);
 }

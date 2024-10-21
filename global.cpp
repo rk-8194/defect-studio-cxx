@@ -12,3 +12,5 @@ CrystalStructure g_workStructure;
 
 // Tasks
 int g_maxSubAttempts = 1;
+int g_maxIterations = 1;
+int g_currentIteration = 1;

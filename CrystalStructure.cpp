@@ -45,6 +45,11 @@ void CrystalStructure::loadFromFileReader(FileReader &fileReader)
     g_workStructure = *this;
 }
 
+array<array<double, 3>, 3> CrystalStructure::getLattice()
+{
+    return lattice;
+}
+
 std::map<int, Atom> CrystalStructure::getAtoms()
 {
     return atoms;
@@ -212,7 +217,7 @@ void CrystalStructure::printStructure()
     Debug("---### Atomic Coordinates ###---", _verbosity);
     for (int i = 0; i < atoms.size(); ++i)
     {
-        Atom atom = atoms[i];
+        Atom atom = atoms[i + 1];
         Debug(format("{}\t{}\t{}\t{}\t{}", (i + 1), atom.atomType, atom.atomPosition.x, atom.atomPosition.y,
                      atom.atomPosition.z),
               _verbosity);
@@ -222,7 +227,7 @@ void CrystalStructure::printStructure()
 void CrystalStructure::addAtom(const int &index, const Atom &atom)
 {
     atoms[index] = atom;
-    Debug(format("{}\t{}\t{}\t{}\t{}", index, atom.atomType, atom.atomPosition.x, atom.atomPosition.y,
-                 atom.atomPosition.z),
+    Debug(format("Added {}\t{}\t{}\t{}\t{}", index, atoms[index].atomType, atoms[index].atomPosition.x,
+                 atoms[index].atomPosition.y, atoms[index].atomPosition.z),
           0);
 }

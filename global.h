@@ -14,3 +14,5 @@ extern CrystalStructure g_workStructure;
 
 // Tasks
 extern int g_maxSubAttempts;
+extern int g_maxIterations;
+extern int g_currentIteration;

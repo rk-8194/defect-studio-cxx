@@ -1,6 +1,7 @@
 #pragma once
 #include "CommandArguments.h"
 #include "CrystalStructure.h"
+#include "FileWriter.h"
 #include "dsutil.h"
 #include "global.h"
 #include <iterator>
@@ -15,6 +16,7 @@ class Command
   public:
     Command();
     void testCommand(CommandArguments &args);
+    void setGlobals(CommandArguments& args);
     void recenter(CommandArguments &args);
     void substitute(CommandArguments &args);
 };

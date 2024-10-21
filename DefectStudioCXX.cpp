@@ -22,7 +22,5 @@ int main()
     // Read the TASKS file.
     TaskManager tasks(tasksReader);
 
-    // g_workStructure.print();
-
     return 0;
 }

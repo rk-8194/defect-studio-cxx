@@ -2,6 +2,7 @@
 
 #include "dsutil.h"
 #include <format>
+#include <iostream>
 #include <map>
 #include <string>
 #include <vector>

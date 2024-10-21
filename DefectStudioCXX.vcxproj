@@ -135,6 +135,7 @@
     <ClCompile Include="DefectStudioCXX.cpp" />
     <ClCompile Include="dsutil.cpp" />
     <ClCompile Include="FileReader.cpp" />
+    <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="global.cpp" />
     <ClCompile Include="TaskManager.cpp" />
   </ItemGroup>
@@ -145,6 +146,7 @@
     <ClInclude Include="CrystalStructure.h" />
     <ClInclude Include="dsutil.h" />
     <ClInclude Include="FileReader.h" />
+    <ClInclude Include="FileWriter.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="TaskManager.h" />
   </ItemGroup>

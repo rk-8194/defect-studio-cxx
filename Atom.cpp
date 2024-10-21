@@ -6,7 +6,7 @@
 /// </summary>
 Atom::Atom()
 {
-    atomType = "H";
+    atomType = "X";
     atomPosition = Vector3D();
 }
 

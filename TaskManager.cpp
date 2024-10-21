@@ -7,12 +7,13 @@ using namespace std;
 unordered_map<string, function<void(Command &, CommandArguments &)>> TaskManager::registeredCommands = {
     {"TASK1", [](Command &cmd, CommandArguments &args) { cmd.testCommand(args); }},
     {"RECENTER", [](Command &cmd, CommandArguments &args) { cmd.recenter(args); }},
-    {"SUBSTITUTE", [](Command &cmd, CommandArguments &args) { cmd.substitute(args); }}};
+    {"SUBSTITUTE", [](Command &cmd, CommandArguments &args) { cmd.substitute(args); }},
+    {"GLOBAL", [](Command &cmd, CommandArguments &args) { cmd.setGlobals(args); }}};
 
 // Definition of registered arguments.
-unordered_map<string, int> TaskManager::registeredArguments = {{"INPUT_FILE", 1}, {"OUTPUT_FILE", 1}, {"POSITION", 3},
-                                                               {"ROTATION", 3},   {"FROM", 1},        {"TO", 1},
-                                                               {"AMOUNT", 1},     {"FRACTION", 1},    {"PERCENT", 1}};
+unordered_map<string, int> TaskManager::registeredArguments = {
+    {"INPUT_FILE", 1}, {"OUTPUT_FILE", 1}, {"POSITION", 3}, {"ROTATION", 3}, {"FROM", 1},   {"TO", 1},
+    {"AMOUNT", 1},     {"FRACTION", 1},    {"PERCENT", 1},  {"REPEAT", 1},   {"MAX_SUB", 1}};
 
 // Default constructor.
 TaskManager::TaskManager()
@@ -123,10 +124,21 @@ void TaskManager::readTasks()
 
 void TaskManager::executeTask(const string &commandName, Command &command, CommandArguments &arguments)
 {
+    g_currentIteration = 0;
+    g_maxIterations = 1;
+    if (arguments.hasArgument("REPEAT"))
+    {
+        g_maxIterations = stoi(arguments.findArgument("REPEAT")[0]);
+    }
+
     auto it = registeredCommands.find(commandName);
     if (it != registeredCommands.end())
     {
-        it->second(command, arguments); // Call the command function, passing the Command instance
+        for (int i = 0; i < g_maxIterations; ++i)
+        {
+            ++g_currentIteration;
+            it->second(command, arguments); // Call the command function, passing the Command instance
+        }
     }
     else
     {
