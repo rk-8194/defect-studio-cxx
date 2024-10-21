@@ -18,6 +18,15 @@ CrystalStructure::CrystalStructure()
     Debug("Created new (empty) crystal structure", 2);
 }
 
+CrystalStructure::CrystalStructure(const array<array<double, 3>, 3> &_lattice, const map<int, Atom> &_atoms)
+{
+    lattice = _lattice;
+    atoms = _atoms;
+
+    // Debug message (detailed)
+    Debug("Created new (empty) crystal structure", 2);
+}
+
 void CrystalStructure::loadFromFileReader(FileReader &fileReader)
 {
     // Debug message (standard)

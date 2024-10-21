@@ -9,6 +9,7 @@ class CrystalStructure
 {
   public:
     CrystalStructure();
+    CrystalStructure(const array<array<double, 3>, 3>& _lattice, const map<int, Atom>& _atoms);
     void loadFromFileReader(FileReader &fileReader);
     void printStructure();
     void addAtom(const int &index, const Atom &atom);

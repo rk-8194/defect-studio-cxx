@@ -14,6 +14,14 @@ void FileWriter::writeToFile(const string &path, const string &fileFormat)
     writeToFile(path, fileFormat, g_workStructure);
 }
 
+// Writes the given atoms and lattice to an input file. Useful for when the work structure is not changed.
+void FileWriter::writeToFile(const string &path, const string &fileFormat, const map<int, Atom> &atoms,
+                             const array<array<double, 3>, 3> &lattice)
+{
+    CrystalStructure structure(lattice, atoms);
+    writeToFile(path, fileFormat, structure);
+}
+
 // Write the selected structure file to the path.
 void FileWriter::writeToFile(const string &path, const string &fileFormat, const CrystalStructure &structure)
 {
