@@ -1,2 +1,12 @@
-﻿  CrystalStructure.cpp
+﻿  Command.cpp
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(176,72): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(176,72): warning C4267:         with
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(176,72): warning C4267:         [
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(176,72): warning C4267:             _Ty=int
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(176,72): warning C4267:         ]
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(189,76): warning C4267: 'argument': conversion from 'size_t' to '_Ty', possible loss of data
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(189,76): warning C4267:         with
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(189,76): warning C4267:         [
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(189,76): warning C4267:             _Ty=int
+C:\Users\vp8194\source\repos\DefectStudioCXX\Command.cpp(189,76): warning C4267:         ]
   DefectStudioCXX.vcxproj -> C:\Users\vp8194\source\repos\DefectStudioCXX\x64\Debug\DefectStudioCXX.exe

@@ -37,6 +37,75 @@ void Command::recenter(CommandArguments &args)
     map<int, Atom> atoms = g_workStructure.getAtoms();
 }
 
+void Command::volume(CommandArguments &args)
+{
+    /* args.printArguments(); */
+
+    // Check for a new input file. Set the work structure if a new input file is loaded.
+    checkInputFile(args);
+
+    // Get the list of atoms in the current working structure.
+    map<int, Atom> atoms = g_workStructure.getAtoms();
+    array<array<double, 3>, 3> lattice = g_workStructure.getLattice();
+
+    // Get the volume of the current cell.
+    double eqVolume = dsutil::determinant3x3(lattice);
+    Debug(format("Equilibrium volume of cell: {}", eqVolume), 1);
+
+    // Check if the paramters exist.
+    double amount = 0; // as a percentage
+    int totalSteps = 0;
+
+    if (!args.hasArgument("AMOUNT") || !args.hasArgument("STEPS"))
+    {
+        Debug("Must specify the values of arguments AMOUNT and STEPS when performing volume-energy setup.", -1);
+        return;
+    }
+
+    // Get the parameters.
+    amount = stod(args.findArgument("AMOUNT")[0]) / 100;
+    totalSteps = stoi(args.findArgument("STEPS")[0]);
+
+    // Get the list of target volumes.
+    vector<double> targetVolumes;
+    double stepSize = (amount * 0.5) / totalSteps;
+
+    for (int i = 0; i < (totalSteps * 0.5); ++i)
+    {
+        double _posVolume = eqVolume * (1 + (i * stepSize));
+        cout << "+/- " << _posVolume << endl;
+
+        double _negVolume = eqVolume * (1 - (i * stepSize));
+        targetVolumes.push_back(_posVolume);
+        targetVolumes.push_back(_negVolume);
+    }
+
+    // Sort the targetVolumes vector.
+    std::sort(targetVolumes.begin(), targetVolumes.end());
+
+    // For each target volume, scale the cell appropriatley.
+    for (int j = 0; j < targetVolumes.size(); ++j)
+    {
+        Debug(format("Processing volume: {}", targetVolumes[j]), 2);
+
+        // Get the scaling factor for each matrix element.
+        double difference = targetVolumes[j] - eqVolume;
+        double scalingFactor = 1.0 + ((1.0 / 3.0) * (difference / eqVolume));
+
+        // Apply the scaling factor to each element of the matrix.
+        array<array<double, 3>, 3> newMatrix = {};
+
+        for (int a = 0; a < lattice.size(); ++a)
+        {
+            for (int b = 0; b < lattice[a].size(); ++b)
+            {
+                cout << (scalingFactor)*lattice[a][b] << endl;
+                FileWriter
+            }
+        }
+    }
+}
+
 void Command::substitute(CommandArguments &args)
 {
     /* args.printArguments(); */

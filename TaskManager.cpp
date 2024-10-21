@@ -7,12 +7,13 @@ using namespace std;
 unordered_map<string, function<void(Command &, CommandArguments &)>> TaskManager::registeredCommands = {
     {"TASK1", [](Command &cmd, CommandArguments &args) { cmd.testCommand(args); }},
     {"RECENTER", [](Command &cmd, CommandArguments &args) { cmd.recenter(args); }},
+    {"VOLUME", [](Command &cmd, CommandArguments &args) { cmd.volume(args); }},
     {"SUBSTITUTE", [](Command &cmd, CommandArguments &args) { cmd.substitute(args); }}};
 
 // Definition of registered arguments.
-unordered_map<string, int> TaskManager::registeredArguments = {{"INPUT_FILE", 1}, {"OUTPUT_FILE", 1}, {"POSITION", 3},
-                                                               {"ROTATION", 3},   {"FROM", 1},        {"TO", 1},
-                                                               {"AMOUNT", 1},     {"FRACTION", 1},    {"PERCENT", 1}};
+unordered_map<string, int> TaskManager::registeredArguments = {
+    {"INPUT_FILE", 1}, {"OUTPUT_FILE", 1}, {"POSITION", 3}, {"ROTATION", 3}, {"FROM", 1}, {"TO", 1},
+    {"AMOUNT", 1},     {"FRACTION", 1},    {"PERCENT", 1},  {"AMOUNT", 1},   {"STEPS", 1}};
 
 // Default constructor.
 TaskManager::TaskManager()

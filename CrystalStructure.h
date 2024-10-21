@@ -13,8 +13,9 @@ class CrystalStructure
     void printStructure();
     void addAtom(const int &index, const Atom &atom);
     map<int, Atom> getAtoms();
+    array<array<double, 3>, 3> getLattice();
     std::map<int, Atom> getAtomsOfType(const string &type);
-    void replaceAtom(const int& index, const Atom& atom);
+    void replaceAtom(const int &index, const Atom &atom);
 
   private:
     map<int, Atom> atoms;
