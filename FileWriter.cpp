@@ -8,6 +8,112 @@ FileWriter::FileWriter()
 {
 }
 
+#include <filesystem>
+#include <iostream>
+#include <sstream>
+#include <vector>
+
+#include <filesystem>
+#include <iostream>
+#include <sstream>
+#include <vector>
+
+string FileWriter::verifyPath(const std::string &path, int currentIteration)
+{
+    Debug(format("Verifying path: {}", path), 3);
+
+    // Split path into directory and file
+    size_t lastSlash = path.find_last_of('/');
+    std::string directoryPath = (lastSlash == std::string::npos) ? "" : path.substr(0, lastSlash);
+    std::string fileName = (lastSlash == std::string::npos) ? path : path.substr(lastSlash + 1);
+
+    std::stringstream pathstream(directoryPath);
+    std::string directory;
+    std::vector<std::string> directories;
+
+    // Split the directory path by '/'
+    while (std::getline(pathstream, directory, '/'))
+    {
+        directories.push_back(directory);
+    }
+
+    if (directories.size() == 0 && g_maxIterations <= 1)
+        return path;
+
+    std::string currentDirectory = "";
+    for (int i = 0; i < directories.size(); ++i)
+    {
+        std::string targetDirectory;
+        if (i > 0)
+            targetDirectory = currentDirectory + "/" + directories[i];
+        else
+            targetDirectory = directories[0];
+
+        Debug(format("Verifying directory: {}", targetDirectory), 3);
+
+        try
+        {
+            if (std::filesystem::exists(targetDirectory))
+            {
+                if (std::filesystem::is_regular_file(targetDirectory))
+                {
+                    throw std::runtime_error(
+                        format("A file with the name '{}' exists where a directory is expected.", targetDirectory));
+                }
+            }
+            else
+            {
+                Debug(format("Directory not found. Creating directory: {}", targetDirectory), 3);
+                std::filesystem::create_directories(targetDirectory);
+            }
+        }
+        catch (const std::filesystem::filesystem_error &e)
+        {
+            std::cerr << "Filesystem error: " << e.what() << std::endl;
+            return path;
+        }
+        catch (const std::runtime_error &e)
+        {
+            std::cerr << "Runtime error: " << e.what() << std::endl;
+            return path;
+        }
+
+        currentDirectory = targetDirectory;
+    }
+
+    // If multiple iterations are used, create a subdirectory for the current iteration.
+    if (g_maxIterations > 1)
+    {
+        std::string iterationDirectory;
+        if (directories.size() > 1)
+            iterationDirectory = currentDirectory + "/" + std::to_string(currentIteration);
+        else
+            iterationDirectory = std::to_string(currentIteration);
+        Debug(format("Creating iteration directory: {}", iterationDirectory), 3);
+
+        try
+        {
+            if (!std::filesystem::exists(iterationDirectory))
+            {
+                std::filesystem::create_directory(iterationDirectory);
+            }
+        }
+        catch (const std::filesystem::filesystem_error &e)
+        {
+            std::cerr << "Filesystem error: " << e.what() << std::endl;
+            return path;
+        }
+
+        currentDirectory = iterationDirectory; // Set the current directory to the iteration folder.
+    }
+
+    // Reconstruct the full path by combining currentDirectory with the original file name
+    std::string fullPath = currentDirectory + "/" + fileName;
+    Debug(format("Final verified path for file: {}", fullPath), 3);
+
+    return fullPath;
+}
+
 // Writes the current working file to the path.
 void FileWriter::writeToFile(const string &path, const string &fileFormat)
 {
@@ -26,19 +132,17 @@ void FileWriter::writeToFile(const string &path, const string &fileFormat, const
 void FileWriter::writeToFile(const string &path, const string &fileFormat, const CrystalStructure &structure)
 {
     // Create an output file stream.
-    string formattedPath;
+    string formattedPath = path;
 
-    if (g_maxIterations > 1)
-        formattedPath = format("{}_{}", path, g_currentIteration);
-    else
-        formattedPath = path;
+    // Verify the path.
+    formattedPath = verifyPath(formattedPath, g_currentIteration);
 
     ofstream outfile(formattedPath);
 
     // Print error if file could not be opened.
     if (!outfile)
     {
-        Debug(format("Could not open file at path: {}", path), -1);
+        Debug(format("Could not open file at path: {}", formattedPath), -1);
         return;
     }
 

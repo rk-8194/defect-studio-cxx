@@ -36,7 +36,9 @@ void CrystalStructure::loadFromFileReader(FileReader &fileReader)
     Debug(std::format("File format: {}", fileReader.getFileFormat()), 2);
     void (CrystalStructure::*buildStructure)(FileReader &) = nullptr; //
 
-    switch (fileReader.getFileFormat())
+    int fileFormat = fileReader.getFileFormat();
+
+    switch (fileFormat)
     {
     case 1:
         buildStructure = &CrystalStructure::buildVasp;
@@ -62,11 +64,6 @@ array<array<double, 3>, 3> CrystalStructure::getLattice()
 std::map<int, Atom> CrystalStructure::getAtoms()
 {
     return atoms;
-}
-
-std::array<array<double,3>,3> CrystalStructure::getLattice()
-{
-    return lattice;
 }
 
 std::map<int, Atom> CrystalStructure::getAtomsOfType(const string &type)

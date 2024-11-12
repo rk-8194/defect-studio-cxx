@@ -24,10 +24,11 @@ class TaskManager
     FileReader fileReader;
 
     void setParent(TaskManager &parent);
-    void executeTask(const std::string &commandName, Command &command, CommandArguments &arguments);
+    void executeTask(const std::string &commandName, CommandArguments &arguments);
 
   private:
-    static unordered_map<string, function<void(Command &, CommandArguments &)>> registeredCommands;
+    static unordered_map<string, function<void(CommandArguments &)>> registeredCommands;
+    static unordered_map<string, function<void(const std::string &commandName)>> commandMap;
     static unordered_map<string, int> registeredArguments;
 
     void readTasks();

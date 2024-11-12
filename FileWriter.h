@@ -1,15 +1,18 @@
 #pragma once
 #include "dsutil.h"
 #include "global.h"
+#include <filesystem>
 #include <format>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
+#include <sstream>
 
 class FileWriter
 {
   public:
     FileWriter();
+    string verifyPath(const string &path, int currentIteration);
     void writeToFile(const string &path, const string &format);
     void writeToFile(const string &path, const string &fileFormat, const map<int, Atom> &atoms,
                      const array<array<double, 3>, 3> &lattice);

@@ -90,19 +90,20 @@ void FileReader::readFile(const string &path)
     // Close the file after reading
     inputFile.close();
 
+    // Set the file format.
+    if (fileFormat < 0)
+        fileFormat = detectFileFormat();
+
     // Final debug messages.
     Debug(format("Finished reading from path: {}", path), 2);
     Debug(format("File is of type: {}", getFileFormat()), 1);
-
-    // Set the file format.
-    fileFormat = getFileFormat();
 
     // Create a new crystal structure if the input file contained crystallographic information.
     switch (fileFormat)
     {
     case 0:
         break;
-    case 1: {   // VASP file structure.
+    case 1: { // VASP file structure.
         CrystalStructure structure;
         structure.loadFromFileReader(*this);
         break;
@@ -114,6 +115,11 @@ void FileReader::readFile(const string &path)
 }
 
 int FileReader::getFileFormat()
+{
+    return fileFormat;
+}
+
+int FileReader::detectFileFormat()
 {
     // Attempt to detect VASP input by either the file name or the file extension.
     // Looking for: 'POSCAR', 'CONTCAR' or '*.vasp'

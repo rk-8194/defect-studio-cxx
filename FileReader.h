@@ -23,6 +23,7 @@ class FileReader
     string filePath;     // The path which points to the file.
     int fileFormat; // The file format which is either specified by the user, detected by the extension, or detected
                     // by the program.
+    int detectFileFormat();
 
     void readFile(const string &path);
     void addLineToFile(const string &newLine);

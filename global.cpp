@@ -4,6 +4,9 @@
 bool g_debugMode = false;
 int g_verbosity = 1;
 
+// User defined variables
+map<string, string> g_userDefined = {};
+
 // Task manager
 int g_randomIDCount = 0;
 

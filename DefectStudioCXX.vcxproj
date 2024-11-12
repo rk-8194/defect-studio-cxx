@@ -129,18 +129,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Atom.cpp" />
+    <ClCompile Include="Cluster.cpp" />
     <ClCompile Include="Command.cpp" />
     <ClCompile Include="CommandArguments.cpp" />
+    <ClCompile Include="Copy.cpp" />
     <ClCompile Include="CrystalStructure.cpp" />
     <ClCompile Include="DefectStudioCXX.cpp" />
     <ClCompile Include="dsutil.cpp" />
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="global.cpp" />
+    <ClCompile Include="Recenter.cpp" />
+    <ClCompile Include="SetGlobals.cpp" />
+    <ClCompile Include="Substitute.cpp" />
     <ClCompile Include="TaskManager.cpp" />
+    <ClCompile Include="Vacancy.cpp" />
+    <ClCompile Include="Volume.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Atom.h" />
+    <ClInclude Include="Cluster.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandArguments.h" />
     <ClInclude Include="CrystalStructure.h" />
