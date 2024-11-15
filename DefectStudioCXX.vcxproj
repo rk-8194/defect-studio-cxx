@@ -143,6 +143,7 @@
     <ClCompile Include="SetGlobals.cpp" />
     <ClCompile Include="Substitute.cpp" />
     <ClCompile Include="TaskManager.cpp" />
+    <ClCompile Include="TetrahedralInterstitial.cpp" />
     <ClCompile Include="Vacancy.cpp" />
     <ClCompile Include="Volume.cpp" />
   </ItemGroup>

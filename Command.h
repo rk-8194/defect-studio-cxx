@@ -17,6 +17,7 @@ class Command
   protected:
     virtual void checkInputFile(CommandArguments &args);
     virtual void checkOutputDirectory(CommandArguments &args);
+    virtual bool hasArguments(CommandArguments &args, const vector<string> &required, const string &errorMessage);
 
   public:
     virtual ~Command() = default;
@@ -34,6 +35,7 @@ class Vacancy : public Command
     int dim;
     vector<Cluster> clusters;
     bool printAll;
+    bool deleteAtoms;
 
     // Methods
     void generateClusters(const map<int, Atom> &atoms, const int &size, const int &maxNN);
@@ -71,4 +73,18 @@ class SetGlobals : public Command
 {
   public:
     void execute(CommandArguments &args) override;
+};
+
+class TetrahedralInterstitial : public Command
+{
+  public:
+    void execute(CommandArguments &args) override;
+
+  private:
+    int targetAtomIndex;
+    vector<Vector3D> sites;
+
+    void getTargetAtomIndex(CommandArguments &args);
+    void generateSites(CommandArguments &args);
+    void populateSites(CommandArguments& args);
 };

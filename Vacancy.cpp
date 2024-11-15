@@ -30,6 +30,7 @@ void Vacancy::execute(CommandArguments &args)
     dim = stoi(args.findArgument("DIM")[0]);
     bravais = args.findArgument("BRAVAIS")[0];
     printAll = args.hasArgument("ALL");
+    deleteAtoms = args.hasArgument("DELETE");
 
     // Parse the CLUSTER argument, which could be either a number or a "XvY" format.
     int amount, maxNN;
@@ -121,7 +122,8 @@ void Vacancy::generateClusters(const map<int, Atom> &atoms, const int &size, con
                             double _orderParameter = calculateOrderParameter(newCluster);
 
                             if (find(_orderParameters.begin(), _orderParameters.end(), _orderParameter) ==
-                                _orderParameters.end() || printAll)
+                                    _orderParameters.end() ||
+                                printAll)
                             {
                                 newCluster.orderParamter = _orderParameter;
                                 newCluster.clusterName = format("{}v{}", n, processedDistances + 1);
@@ -308,7 +310,10 @@ void Vacancy::writeVacancies(CommandArguments &args)
             if (isInCluster)
                 atom.atomType = "X";
 
-            newAtoms[j] = atom; // Use atom index as key and the atom object as value
+            if (deleteAtoms && !isInCluster)
+                newAtoms[j] = atom; // Use atom index as key and the atom object as value
+            else if (!deleteAtoms)
+                newAtoms[j] = atom;
         }
 
         // Make a new crystal structure with the newAtoms

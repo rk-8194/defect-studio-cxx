@@ -10,6 +10,11 @@ unordered_map<string, function<void(CommandArguments &)>> TaskManager::registere
          auto cmd = std::make_unique<SetGlobals>();
          cmd->execute(args);
      }},
+    {"TIS",
+     [](CommandArguments &args) {
+         auto cmd = std::make_unique<TetrahedralInterstitial>();
+         cmd->execute(args);
+     }},
     {"COPY",
      [](CommandArguments &args) {
          auto cmd = std::make_unique<Copy>();
@@ -37,10 +42,10 @@ unordered_map<string, function<void(CommandArguments &)>> TaskManager::registere
 
 // Definition of registered arguments.
 unordered_map<string, int> TaskManager::registeredArguments = {
-    {"INPUT_FILE", 1}, {"OUTPUT_DIR", 1}, {"OUTPUT_FILE", 1}, {"POSITION", 3}, {"ROTATION", 3},
-    {"FROM", 1},       {"TO", 1},         {"AMOUNT", 1},      {"FRACTION", 1}, {"PERCENT", 1},
-    {"AMOUNT", 1},     {"STEPS", 1},      {"REPEAT", 1},      {"MIN", 1},      {"MAX", 1},
-    {"DIM", 1},        {"ELEMENT", 1},    {"BRAVAIS", 1},     {"CLUSTER", 1},  {"ALL", 0}};
+    {"INPUT_FILE", 1}, {"OUTPUT_DIR", 1}, {"OUTPUT_FILE", 1}, {"POSITION", 3}, {"ROTATION", 3}, {"FROM", 1},
+    {"TO", 1},         {"AMOUNT", 1},     {"FRACTION", 1},    {"PERCENT", 1},  {"AMOUNT", 1},   {"STEPS", 1},
+    {"REPEAT", 1},     {"MIN", 1},        {"MAX", 1},         {"DIM", 1},      {"ELEMENT", 1},  {"BRAVAIS", 1},
+    {"CLUSTER", 1},    {"ALL", 0},        {"DELETE", 0}};
 
 // Default constructor.
 TaskManager::TaskManager()

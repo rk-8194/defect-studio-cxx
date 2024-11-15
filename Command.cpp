@@ -1,6 +1,29 @@
 #include "Command.h"
 
 #pragma region Protected Functions
+
+/// <summary>
+/// Checks that the given list of arguments has all of the required arguments, and prints out an error message if this
+/// is not the case.
+/// </summary>
+/// <param name="args">- The list of arguments passed to the command.</param>
+/// <param name="required">- The required argument keywords.</param>
+/// <param name="errorMessage">- The error message to print if a keyword is missing.</param>
+/// <returns></returns>
+bool Command::hasArguments(CommandArguments &args, const vector<string> &required, const string &errorMessage)
+{
+    for (int i = 0; i < required.size(); ++i)
+    {
+        if (!args.hasArgument(required[i]))
+        {
+            Debug(errorMessage, -1);
+            return false;
+        }
+    }
+
+    return true;
+}
+
 /// <summary>
 /// Checks to see if an input file has been specified.
 /// If true, open the input file.

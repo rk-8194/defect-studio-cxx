@@ -2,28 +2,3 @@ Cluster 0:	chi: 0
   Atom Indices and Distances:
     Atom Index: 1, Distance: 0
 
-Cluster 1:	chi: 1
-  Atom Indices and Distances:
-    Atom Index: 1, Distance: 0
-    Atom Index: 2, Distance: 0.173205
-
-Cluster 2:	chi: 1.33333
-  Atom Indices and Distances:
-    Atom Index: 1, Distance: 0
-    Atom Index: 3, Distance: 0.2
-
-Cluster 3:	chi: 2.66667
-  Atom Indices and Distances:
-    Atom Index: 1, Distance: 0
-    Atom Index: 13, Distance: 0.282843
-
-Cluster 4:	chi: 3.66667
-  Atom Indices and Distances:
-    Atom Index: 1, Distance: 0
-    Atom Index: 4, Distance: 0.331662
-
-Cluster 5:	chi: 4
-  Atom Indices and Distances:
-    Atom Index: 1, Distance: 0
-    Atom Index: 63, Distance: 0.34641
-
