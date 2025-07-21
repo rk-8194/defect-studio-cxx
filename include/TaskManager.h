@@ -27,6 +27,7 @@ class TaskManager
     void executeTask(const std::string &commandName, CommandArguments &arguments);
 
   private:
+    // Initialise the commands and arguments that can be used in the TASKS file.
     static unordered_map<string, function<void(CommandArguments &)>> registeredCommands;
     static unordered_map<string, function<void(const std::string &commandName)>> commandMap;
     static unordered_map<string, int> registeredArguments;

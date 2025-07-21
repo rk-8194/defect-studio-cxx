@@ -1,5 +1,6 @@
 #include "global.h"
 
+/* GLOBAL VARIABLES AND CONSTANTS */
 // Debug
 bool g_debugMode = false;
 int g_verbosity = 3;

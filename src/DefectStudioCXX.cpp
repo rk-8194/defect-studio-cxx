@@ -12,14 +12,14 @@ int main()
     // Initialisation message.
     std::cout << "Hello World!\n";
 
-    // Debug settings.
+    // Debug settings. Print debug messages at verbosity level 3.
     g_debugMode = true;
     g_verbosity = 3;
 
-    // Create the file readers.
+    // Create the file reader to read from the TASKS file.
     FileReader tasksReader("TASKS");
 
-    // Read the TASKS file.
+    // Read the TASKS file and run the tasks.
     TaskManager tasks(tasksReader);
 
     return 0;

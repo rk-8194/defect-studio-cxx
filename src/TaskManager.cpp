@@ -3,44 +3,50 @@
 using namespace dsutil;
 using namespace std;
 
-// Definition of registered commands.
+// Definition of registered commands. Every command that is used in DS should be registered here,
+// with exactly the same format as seen below.
 unordered_map<string, function<void(CommandArguments &)>> TaskManager::registeredCommands = {
-    {"SET",
+    {"SET",                                                             // Sets a global variable.
      [](CommandArguments &args) {
          auto cmd = std::make_unique<SetGlobals>();
          cmd->execute(args);
      }},
-    {"TIS",
+    {"TIS",                                                             // Generates TIS defects.
      [](CommandArguments &args) {
          auto cmd = std::make_unique<TetrahedralInterstitial>();
          cmd->execute(args);
      }},
-    {"COPY",
+    {"COPY",                                                            // Copies a file from one place to another.
      [](CommandArguments &args) {
          auto cmd = std::make_unique<Copy>();
          cmd->execute(args);
      }},
-    {"RECENTER",
+    {"RECENTER",                                                        // Recenters the structure on the given atom.
      [](CommandArguments &args) {
          auto cmd = std::make_unique<Recenter>();
          cmd->execute(args);
      }},
-    {"VOLUME",
+    {"VOLUME",                                                          // Expands/contracts the structure.
      [](CommandArguments &args) {
          auto cmd = std::make_unique<Volume>();
          cmd->execute(args);
      }},
-    {"VACANCY",
+    {"VACANCY",                                                         // Generates a vacancy or vacancy cluster.
      [](CommandArguments &args) {
          auto cmd = std::make_unique<Vacancy>();
          cmd->execute(args);
      }},
-    {"SURFACE",
+    {"SURFACE",                                                         // Creates a surface at a given orientation.
      [](CommandArguments &args) {
          auto cmd = std::make_unique<Surface>();
          cmd->execute(args);
      }},
-    {"SUBSTITUTE", [](CommandArguments &args) {
+	{"SUBSTITUTE",                                                      // Substitutes an atom with another element.
+	 [](CommandArguments& args) {
+		 auto cmd = std::make_unique<Substitute>();
+		 cmd->execute(args);
+	 }},                    
+     [](CommandArguments &args) {
          auto cmd = std::make_unique<Substitute>();
          cmd->execute(args);
      }}};
@@ -165,13 +171,14 @@ void TaskManager::readTasks()
             }
         }
 
+		// Finally, execute the task with the command and arguments.
         executeTask(keys[0], args);
     }
 }
 
 void TaskManager::executeTask(const string &commandName, CommandArguments &arguments)
 {
-    // Find the command in the registered commands map
+    // Find the command in the registered commands map. This is defined at the top of the TaskManager.cpp file (this file).
     auto it = registeredCommands.find(commandName);
 
     if (it != registeredCommands.end())
@@ -188,7 +195,7 @@ void TaskManager::executeTask(const string &commandName, CommandArguments &argum
                 g_currentIteration = i + 1;
 
                 // Execute the command (using the lambda from the map)
-                it->second(arguments); // This lambda is responsible for creating and executing the command
+                it->second(arguments); // This lambda is responsible for creating and executing the command!
             }
 
             // Reset the iteration count
@@ -197,7 +204,7 @@ void TaskManager::executeTask(const string &commandName, CommandArguments &argum
         else
         {
             // If "REPEAT" argument isn't present, just execute the command once
-            it->second(arguments); // This lambda is responsible for creating and executing the command
+            it->second(arguments);
         }
     }
     else

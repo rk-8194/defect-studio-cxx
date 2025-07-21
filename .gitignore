@@ -7,3 +7,10 @@ POSCAR_*
 /DefectStudioCXX/x64/Debug/DefectStudioCXX.tlog/CL.command.1.tlog
 /OUTPUT
 /Output
+/DefectStudioCXX
+/x64
+/.git
+/.vscode
+/*.sln
+/build
+/*.vcxproj
