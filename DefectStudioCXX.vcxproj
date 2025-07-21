@@ -139,6 +139,7 @@
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="global.cpp" />
+    <ClCompile Include="Surface.cpp" />
     <ClCompile Include="Recenter.cpp" />
     <ClCompile Include="SetGlobals.cpp" />
     <ClCompile Include="Substitute.cpp" />
