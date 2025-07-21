@@ -16,3 +16,11 @@ Clone the repository, then install using the usual cmake workflow:
 > make
 > sudo make install
 
+## Usage
+The **TASKS** file is where you define the tasks (duh) that DS will run through. The current dev repository contains a TASKS file with some tasks already defined (and others commented out with a # at the start of the each line). Each task consists of a command (the first word in the task line) and the command arguments that follow it. For instance,
+
+> TIS INPUT_FILE POSCAR RANDOM W PERCENT 1 ELEMENT H DIM 8 OUTPUT_DIR WH_6750
+
+will add a number of H atoms at tetrahedral interstitial sites (TIS) near randomly-selected W atoms in the input file ('POSCAR'). 1% of the W atoms in the input file will be targetted. The output file will be placed in a folder called WH_6750.
+
+A full list of commands and command arguments will be made available soon(tm).
