@@ -1,0 +1,12 @@
+/usr/local/bin/DefectStudioCXX
+/usr/local/include/Atom.h
+/usr/local/include/Cluster.h
+/usr/local/include/Command.h
+/usr/local/include/CommandArguments.h
+/usr/local/include/CrystalStructure.h
+/usr/local/include/dsutil.h
+/usr/local/include/FileReader.h
+/usr/local/include/FileWriter.h
+/usr/local/include/global.h
+/usr/local/include/TaskManager.h
+/usr/local/lib/cmake/DefectStudioCXX/DefectStudioCXXConfig.cmake
